@@ -1,36 +1,37 @@
 <script lang="ts">
 import SelectIngredients from './SelectIngredients.vue';
+import Tag from './Tag.vue';
 
 export default {
-  data(){
+  data() {
     return {
       ingredientes: ['Garlic', 'Butter', 'Oregano']
     };
   },
-  components: {SelectIngredients}
+  components: { SelectIngredients, Tag }
 }
 </script>
 
 <template>
-    <main class="conteudo-principal">
-        <section>
-            <span class="subtitulo-lg sua-lista-texto">
-                Your List:
-            </span>
-            <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
-              <li v-for="ingrediente in ingredientes" :key="ingrediente" class="ingrediente">
-                {{ ingrediente }}
-              </li>
-            </ul>
+  <main class="conteudo-principal">
+    <section>
+      <span class="subtitulo-lg sua-lista-texto">
+        Your List:
+      </span>
+      <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
+        <li v-for="ingrediente in ingredientes" :key="ingrediente">
+          <Tag :texto="ingrediente" ativa />
+        </li>
+      </ul>
 
-            <p v-else class="paragrafo lista-vazia">
-              <img src="../assets/images/icones/lista-vazia.svg" alt="Ícone de pesquisa">
-                Your list is empty, select ingredients to get started.
-            </p>
-        </section>
+      <p v-else class="paragrafo lista-vazia">
+        <img src="../assets/images/icones/lista-vazia.svg" alt="Ícone de pesquisa">
+        Your list is empty, select ingredients to get started.
+      </p>
+    </section>
 
-        <SelectIngredients/>
-    </main>
+    <SelectIngredients />
+  </main>
 </template>
 
 <style scoped>
@@ -66,8 +67,8 @@ export default {
   min-width: 4.25rem;
   padding: 0.5rem;
   text-align: center;
-    transition: 0.2s;
-    color: var(--creme, #FFFAF3);
+  transition: 0.2s;
+  color: var(--creme, #FFFAF3);
   background: var(--coral, #F0633C);
   font-weight: 700;
 }

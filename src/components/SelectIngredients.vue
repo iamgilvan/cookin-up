@@ -1,6 +1,7 @@
 <script lang="ts">
 import { obterCategorias } from '@/http/index';
 import type ICategory from '@/interfaces/ICategory';
+import CardCategory from './CardCategory.vue';
 
 export default {
   data() {
@@ -8,30 +9,31 @@ export default {
       categorias: [] as ICategory[]
     }
   },
+  components: { CardCategory },
   async created() {
     this.categorias = await obterCategorias();
   }
 }
 </script>
 <template>
-    <section class="selecionar-ingredientes">
-      <h1 class="cabecalho titulo-ingredientes">Ingredients</h1>
+  <section class="selecionar-ingredientes">
+    <h1 class="cabecalho titulo-ingredientes">Ingredients</h1>
 
-      <p class="paragrafo-lg instrucoes">
-        Select below the ingredients you want to use in this recipe:
-      </p>
+    <p class="paragrafo-lg instrucoes">
+      Select below the ingredients you want to use in this recipe:
+    </p>
 
-      <ul class="categorias">
-        <li v-for="categoria in categorias" :key="categoria.nome">
-            {{ categoria.nome }}
-        </li>
+    <ul class="categorias">
+      <li v-for="categoria in categorias" :key="categoria.nome">
+        <CardCategory :categoria="categoria" />
+      </li>
     </ul>
 
-      <p class="paragrafo dica">
-        *Please note: we assume you have salt, pepper and water at home.
-      </p>
-    </section>
-  </template>
+    <p class="paragrafo dica">
+      *Please note: we assume you have salt, pepper and water at home.
+    </p>
+  </section>
+</template>
 
 <style scoped>
 .selecionar-ingredientes {
