@@ -1,13 +1,13 @@
 <script lang="ts">
 import type ICategory from '@/interfaces/ICategory';
 import type { PropType } from 'vue';
-import Tag from './Tag.vue';
+import SelectableIngredient from './selectableIngredient.vue';
 
 export default {
     props: {
         categoria: { type: Object as PropType<ICategory>, required: true }
     },
-    components: { Tag }
+    components: { SelectableIngredient }
 }
 </script>
 
@@ -22,7 +22,7 @@ export default {
 
         <ul class="categoria__ingredientes">
             <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-                <Tag :texto="ingrediente" />
+                <SelectableIngredient :ingrediente="ingrediente" />
             </li>
         </ul>
     </article>
