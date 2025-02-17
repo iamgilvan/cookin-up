@@ -1,36 +1,31 @@
 <script lang="ts">
 import SelectIngredients from './SelectIngredients.vue';
 import Tag from './Tag.vue';
+import YourList from './YourList.vue';
 
 export default {
   data() {
     return {
-      ingredientes: ['Garlic', 'Butter', 'Oregano']
+      ingredientes: [] as string[],
     };
   },
-  components: { SelectIngredients, Tag }
+  components: { SelectIngredients, Tag, YourList},
+  methods: { 
+    adicionarIngrediente(ingrediente: string){
+      this.ingredientes.push(ingrediente)
+    },
+    removerIngrediente(ingrediente: string){
+      this.ingredientes = this.ingredientes.filter(i => i!== ingrediente)
+    }
+  }
 }
 </script>
 
 <template>
   <main class="conteudo-principal">
-    <section>
-      <span class="subtitulo-lg sua-lista-texto">
-        Your List:
-      </span>
-      <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
-        <li v-for="ingrediente in ingredientes" :key="ingrediente">
-          <Tag :texto="ingrediente" ativa />
-        </li>
-      </ul>
+    <YourList :ingredientes="ingredientes" />
 
-      <p v-else class="paragrafo lista-vazia">
-        <img src="../assets/images/icones/lista-vazia.svg" alt="Ícone de pesquisa">
-        Your list is empty, select ingredients to get started.
-      </p>
-    </section>
-
-    <SelectIngredients />
+    <SelectIngredients @adicionar-ingrediente="adicionarIngrediente" @remover-ingrediente="removerIngrediente"/>
   </main>
 </template>
 
@@ -47,20 +42,6 @@ export default {
   gap: 5rem;
 }
 
-.sua-lista-texto {
-  color: var(--coral, #F0633C);
-  display: block;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.ingredientes-sua-lista {
-  display: flex;
-  justify-content: center;
-  gap: 1rem 1.5rem;
-  flex-wrap: wrap;
-}
-
 .ingrediente {
   display: inline-block;
   border-radius: 0.5rem;
@@ -71,17 +52,6 @@ export default {
   color: var(--creme, #FFFAF3);
   background: var(--coral, #F0633C);
   font-weight: 700;
-}
-
-.lista-vazia {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-
-  color: var(--coral, #F0633C);
-  text-align: center;
 }
 
 @media only screen and (max-width: 1300px) {
