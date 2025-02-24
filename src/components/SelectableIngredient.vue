@@ -2,6 +2,7 @@
 import Tag from './Tag.vue';
 
 export default {
+    name: 'SelectableIngredient',
     props: {
         ingrediente: { type: String, required: true }
     },

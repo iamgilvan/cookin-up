@@ -2,12 +2,12 @@
 export default {
   props: {
     texto: { type: String, required: true },
-  }
+  },
 }
 </script>
 
 <template>
-  <button class="paragrafo-lg botao-principal">
+    <button class="paragrafo-lg botao-principal">
     {{ texto }}
   </button>
 </template>
